@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessagingPoc.Aws", "MessagingPoc.Aws\MessagingPoc.Aws.csproj", "{ABF6F9CB-BDA0-4026-BAF3-D100186825E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessagingPoc.Wolverine", "MessagingPoc.Wolverine\MessagingPoc.Wolverine.csproj", "{D8E04AB2-08CB-4EEE-9AF0-1508D67D97A3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ABF6F9CB-BDA0-4026-BAF3-D100186825E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABF6F9CB-BDA0-4026-BAF3-D100186825E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABF6F9CB-BDA0-4026-BAF3-D100186825E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABF6F9CB-BDA0-4026-BAF3-D100186825E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8E04AB2-08CB-4EEE-9AF0-1508D67D97A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8E04AB2-08CB-4EEE-9AF0-1508D67D97A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8E04AB2-08CB-4EEE-9AF0-1508D67D97A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8E04AB2-08CB-4EEE-9AF0-1508D67D97A3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,6 @@
+@MessagingPoc.Aws_HostAddress = http://localhost:5009
+
+GET {{MessagingPoc.Aws_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
