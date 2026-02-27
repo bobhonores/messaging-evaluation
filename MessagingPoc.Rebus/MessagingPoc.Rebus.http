@@ -1,0 +1,9 @@
+@MessagingPoc.Rebus_HostAddress = http://localhost:5010
+
+GET {{MessagingPoc.Rebus_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
+POST {{MessagingPoc.Rebus_HostAddress}}/weatherforecast/
+Accept: application/json

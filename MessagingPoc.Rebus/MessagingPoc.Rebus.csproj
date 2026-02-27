@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!--
+            Rebus.AwsSnsAndSqs 6.0.9 was compiled against Rebus 6.5.5 and implements the ITransport
+            interface from that era.  Rebus 7.x/8.x added new interface members (GetSubscriberAddresses,
+            HandlePoisonMessage) that break binary compatibility, so we pin to Rebus 6.7.0 (latest 6.x).
+
+            Rebus.ServiceProvider 10.x pins to Rebus 8.9.0, so we use 6.4.1 which requires Rebus >= 6.0.0.
+        -->
+        <PackageReference Include="Rebus" Version="6.7.0" />
+        <PackageReference Include="Rebus.ServiceProvider" Version="6.4.1" />
+        <PackageReference Include="Rebus.AwsSnsAndSqs" Version="6.0.9" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.3" />
+        <PackageReference Include="Scalar.AspNetCore" Version="2.12.47" />
+    </ItemGroup>
+
+</Project>
