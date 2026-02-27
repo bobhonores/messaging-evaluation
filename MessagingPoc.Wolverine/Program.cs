@@ -1,4 +1,3 @@
-using Amazon.Runtime;
 using Scalar.AspNetCore;
 using Wolverine;
 using Wolverine.AmazonSqs;

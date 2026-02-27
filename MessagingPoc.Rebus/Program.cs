@@ -11,13 +11,15 @@ using Scalar.AspNetCore;
 var builder = WebApplication.CreateBuilder(args);
 var cfg = builder.Configuration;
 
+var serviceUrl = cfg["AWS:ServiceURL"];
+
 builder.Services.AddRebus(configure =>
     configure
         .Transport(t =>
             t.UseAmazonSnsAndSqs(
-                amazonSqsConfig: new AmazonSQSConfig { ServiceURL = cfg["AWS:ServiceURL"] },
+                amazonSqsConfig: new AmazonSQSConfig { ServiceURL = serviceUrl },
                 amazonSimpleNotificationServiceConfig: new AmazonSimpleNotificationServiceConfig
-                    { ServiceURL = cfg["AWS:ServiceURL"] },
+                    { ServiceURL = serviceUrl },
                 workerQueueAddress: cfg["MessageBus:Queue"]!,
                 topicFormatter: new AttributeBasedTopicFormatter()
             ))
