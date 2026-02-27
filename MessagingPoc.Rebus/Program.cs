@@ -11,16 +11,17 @@ using Scalar.AspNetCore;
 var builder = WebApplication.CreateBuilder(args);
 var cfg = builder.Configuration;
 
-builder.Services.AddRebus(configure => configure
-    .Transport(t => t.UseAmazonSnsAndSqs(
-        amazonCredentialsFactory: new FailbackAmazonCredentialsFactory(),
-        amazonSqsConfig: new AmazonSQSConfig { ServiceURL = cfg["AWS:ServiceURL"] },
-        amazonSimpleNotificationServiceConfig: new AmazonSimpleNotificationServiceConfig { ServiceURL = cfg["AWS:ServiceURL"] },
-        workerQueueAddress: cfg["MessageBus:Queue"]!,
-        amazonSnsAndSqsTransportOptions: new AmazonSnsAndSqsTransportOptions(),
-        topicFormatter: new AttributeBasedTopicFormatter(),
-        snsAttributeMapperBuilder: null))
-    .Routing(r => r.TypeBased().Map<WeatherForecast>(cfg["MessageBus:Queue"]!)));
+builder.Services.AddRebus(configure =>
+    configure
+        .Transport(t =>
+            t.UseAmazonSnsAndSqs(
+                amazonSqsConfig: new AmazonSQSConfig { ServiceURL = cfg["AWS:ServiceURL"] },
+                amazonSimpleNotificationServiceConfig: new AmazonSimpleNotificationServiceConfig
+                    { ServiceURL = cfg["AWS:ServiceURL"] },
+                workerQueueAddress: cfg["MessageBus:Queue"]!,
+                topicFormatter: new AttributeBasedTopicFormatter()
+            ))
+        .Routing(r => r.TypeBased().Map<WeatherForecast>(cfg["MessageBus:Queue"]!)));
 
 builder.Services.AddRebusHandler<WeatherForecastHandler>();
 
