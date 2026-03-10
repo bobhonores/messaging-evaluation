@@ -26,6 +26,7 @@ builder.Services.AddRebus(configure =>
         .Routing(r => r.TypeBased().Map<WeatherForecast>(cfg["MessageBus:Queue"]!)));
 
 builder.Services.AddRebusHandler<WeatherForecastHandler>();
+builder.Services.AddRebusHandler<WeatherAlertHandler>();
 
 builder.Services.AddOpenApi();
 
@@ -67,12 +68,38 @@ app.MapPost("/weatherforecast", async (IBus bus) =>
     return forecast;
 });
 
+var severities = new[] { "Advisory", "Watch", "Warning", "Emergency" };
+var locations  = new[] { "North", "South", "East", "West", "Central" };
+
+app.MapPost("/weatheralert", async (IBus bus) =>
+{
+    var alert = new WeatherAlert(
+        locations[Random.Shared.Next(locations.Length)],
+        severities[Random.Shared.Next(severities.Length)],
+        Random.Shared.Next(1, 100));
+    await bus.Publish(alert);
+    return alert;
+});
+
 app.Run();
+
+[TopicName("rebus-demo-topic")]
+public record WeatherAlert(string Location, string Severity, int WindSpeedKph);
 
 [TopicName("rebus-demo-topic")]
 public record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+}
+
+public class WeatherAlertHandler(ILogger<WeatherAlertHandler> logger) : IHandleMessages<WeatherAlert>
+{
+    public Task Handle(WeatherAlert message)
+    {
+        logger.LogInformation("Received alert for {location} — severity: {severity}, wind: {wind} kph",
+            message.Location, message.Severity, message.WindSpeedKph);
+        return Task.CompletedTask;
+    }
 }
 
 public class WeatherForecastHandler(ILogger<WeatherForecastHandler> logger) : IHandleMessages<WeatherForecast>
